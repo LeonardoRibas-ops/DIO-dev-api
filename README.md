@@ -1,66 +1,67 @@
-# Santander Dev Week 2023 Java API
+# API de Cadastro de Produtos
 
-RESTful API da Santander Dev Week 2023 construída em Java 17 com Spring Boot 3.
+Este projeto é uma API REST desenvolvida com Spring Boot para cadastro e consulta de produtos. A aplicação utiliza tecnologias modernas como autenticação JWT, validações de entradas e boas práticas de desenvolvimento, visando proporcionar uma solução escalável e de fácil integração.
 
-## Principais Tecnologias
- - **Java 17**: Utilizaremos a versão LTS mais recente do Java para tirar vantagem das últimas inovações que essa linguagem robusta e amplamente utilizada oferece;
- - **Spring Boot 3**: Trabalharemos com a mais nova versão do Spring Boot, que maximiza a produtividade do desenvolvedor por meio de sua poderosa premissa de autoconfiguração;
- - **Spring Data JPA**: Exploraremos como essa ferramenta pode simplificar nossa camada de acesso aos dados, facilitando a integração com bancos de dados SQL;
- - **OpenAPI (Swagger)**: Vamos criar uma documentação de API eficaz e fácil de entender usando a OpenAPI (Swagger), perfeitamente alinhada com a alta produtividade que o Spring Boot oferece;
- - **Railway**: facilita o deploy e monitoramento de nossas soluções na nuvem, além de oferecer diversos bancos de dados como serviço e pipelines de CI/CD.
+## Tecnologias Utilizadas
 
-## [Link do Figma](https://www.figma.com/file/0ZsjwjsYlYd3timxqMWlbj/SANTANDER---Projeto-Web%2FMobile?type=design&node-id=1421%3A432&mode=design&t=6dPQuerScEQH0zAn-1)
+- **Java 17**: A versão mais recente do Java LTS, oferecendo melhorias de performance e novos recursos.
+- **Spring Boot 3**: Framework para construção de aplicações Java com foco em produtividade e escalabilidade.
+- **Spring Data JPA**: Utilizado para acesso simplificado ao banco de dados SQL, permitindo fácil persistência e recuperação de dados.
+- **JWT (JSON Web Token)**: Implementação de autenticação e autorização utilizando tokens JWT.
+- **Swagger/OpenAPI**: Para documentação da API, facilitando o entendimento e uso pelos desenvolvedores.
+- **JUnit & Mockito**: Frameworks utilizados para garantir a qualidade do código, através de testes unitários e de integração.
 
-O Figma foi utilizado para a abstração do domínio desta API, sendo útil na análise e projeto da solução.
+## Funcionalidades
 
-## Diagrama de Classes (Domínio da API)
+A API oferece os seguintes recursos:
 
-```mermaid
-classDiagram
-  class User {
-    -String name
-    -Account account
-    -Feature[] features
-    -Card card
-    -News[] news
-  }
+- **Cadastro de Produto**: Permite a criação de novos produtos.
+- **Consulta de Produto**: Permite a consulta de produtos cadastrados através do ID.
+- **Validações**: Todos os dados de entrada são validados para garantir a integridade da aplicação.
+- **Autenticação**: Utiliza JWT para autenticação e autorização dos usuários.
+- **Documentação**: A API está completamente documentada via Swagger/OpenAPI.
 
-  class Account {
-    -String number
-    -String agency
-    -Number balance
-    -Number limit
-  }
+## Endpoints da API
 
-  class Feature {
-    -String icon
-    -String description
-  }
+- **POST /products**: Criação de um novo produto.
+  - Corpo da requisição:
+    ```json
+    {
+      "name": "Produto X",
+      "description": "Descrição do produto",
+      "price": 99.99
+    }
+    ```
+  - Resposta:
+    ```json
+    {
+      "name": "Produto X",
+      "description": "Descrição do produto",
+      "price": 99.99
+    }
+    ```
 
-  class Card {
-    -String number
-    -Number limit
-  }
+- **GET /products/{id}**: Consulta um produto pelo seu ID.
+  - Resposta:
+    ```json
+    {
+      "name": "Produto X",
+      "description": "Descrição do produto",
+      "price": 99.99
+    }
+    ```
 
-  class News {
-    -String icon
-    -String description
-  }
+## Como Rodar a Aplicação Localmente
 
-  User "1" *-- "1" Account
-  User "1" *-- "N" Feature
-  User "1" *-- "1" Card
-  User "1" *-- "N" News
-```
+### Pré-requisitos
 
-## Documentação da API (Swagger)
+1. **Java 17** ou superior instalado.
+2. **Maven** ou **Gradle** (dependendo da configuração do seu projeto).
+3. **IDE**: Você pode usar qualquer IDE de sua preferência (IntelliJ IDEA, Eclipse, VSCode, etc.).
 
-### [https://sdw-2023-prd.up.railway.app/swagger-ui.html](https://sdw-2023-prd.up.railway.app/swagger-ui.html)
+### Passos
 
-Esta API ficará disponível no Railway por um período de tempo limitado, mas este é um código-fonte aberto. Portanto, sintam-se à vontade para cloná-lo, modificá-lo (já que é um bom projeto base para novos projetos) e executar localmente ou onde achar mais interessante! Só não esquece de marcar a gente quando divulgar a sua solução 🥰
+1. Clone este repositório:
+   ```bash
+   git clone https://github.com/seu-usuario/nome-do-repositorio.git
 
-### IMPORTANTE
-
-Aos interessados no desenvolvimento da tela inicial do App do Santander (Figma) em Angular, Android, iOS ou Flutter... Caso a URL produtiva não esteja mais disponível, deixamos um Backup no GitHub Pages, é só dar um GET lá 😘
-- URL de Produção: https://sdw-2023-prd.up.railway.app/users/1
-- Mock (Backup): https://digitalinnovationone.github.io/santander-dev-week-2023-api/mocks/find_one.json
